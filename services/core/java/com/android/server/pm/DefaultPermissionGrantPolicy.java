@@ -716,7 +716,7 @@ final class DefaultPermissionGrantPolicy {
                         // Google Dialer
             PackageParser.Package dialerPackage = getDefaultSystemHandlerActivityPackageLPr(
 		    "com.google.android.dialer", userId);
-            if (dilaerPackage != null) {
+            if (dialerPackage != null) {
                 grantDefaultPermissionsToDefaultSystemDialerAppLPr(dialerPackage, userId);
             }
 
