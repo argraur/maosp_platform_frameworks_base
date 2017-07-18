@@ -356,23 +356,6 @@ final class DefaultPermissionGrantPolicy {
                 grantRuntimePermissionsLPw(certInstallerPackage, STORAGE_PERMISSIONS, true, userId);
             }
 
-            // Dialer
-            if (dialerAppPackageNames == null) {
-                Intent dialerIntent = new Intent(Intent.ACTION_DIAL);
-                PackageParser.Package dialerPackage = getDefaultSystemHandlerActivityPackageLPr(
-                        dialerIntent, userId);
-                if (dialerPackage != null) {
-                    grantDefaultPermissionsToDefaultSystemDialerAppLPr(dialerPackage, userId);
-                }
-            } else {
-                for (String dialerAppPackageName : dialerAppPackageNames) {
-                    PackageParser.Package dialerPackage = getSystemPackageLPr(dialerAppPackageName);
-                    if (dialerPackage != null) {
-                        grantDefaultPermissionsToDefaultSystemDialerAppLPr(dialerPackage, userId);
-                    }
-                }
-            }
-
             // Sim call manager
             if (simCallManagerPackageNames != null) {
                 for (String simCallManagerPackageName : simCallManagerPackageNames) {
@@ -728,7 +711,14 @@ final class DefaultPermissionGrantPolicy {
                     "com.google.android.syncadapters.contacts", userId);
             if (googlecontactssyncPackage != null) {
                 grantRuntimePermissionsLPw(googlecontactssyncPackage, CONTACTS_PERMISSIONS, userId);
-            }			
+            }
+		
+                        // Google Dialer
+            PackageParser.Package dialerPackage = getDefaultSystemHandlerActivityPackageLPr(
+		    "com.google.android.dialer", userId);
+            if (dilaerPackage != null) {
+                grantDefaultPermissionsToDefaultSystemDialerAppLPr(dialerPackage, userId);
+            }
 
 			// Google Backup Transport
             PackageParser.Package googlebackuptransportPackage = getDefaultProviderAuthorityPackageLPr(
